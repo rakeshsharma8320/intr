@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./App.scss";
+import Input from "./components/Input";
 
 function App() {
   const firstName = useRef(null);
@@ -22,17 +23,17 @@ function App() {
 
   return (
     <div className="App">
-      <input
+      <Input
         ref={firstName}
         onKeyDown={firstNameHandler}
         placeholder="enter first name"
       />
-      <input
+      <Input
         ref={lastName}
         onKeyDown={lastNameHandler}
         placeholder="enter last name"
       />
-      <input
+      <Input
         ref={submit}
         onKeyDown={submitHandler}
         type="submit"
