@@ -1,39 +1,45 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.scss";
 
 function App() {
-  const [growth, setGrowth] = useState(0);
+  const firstName = useRef(null);
+  const lastName = useRef(null);
+  const submit = useRef(null);
 
   useEffect(() => {
-    console.log("i am born");
-    return () => console.log("did mount return called");
+    firstName.current.focus();
   }, []);
-  
-  useEffect(() => {
-    console.log("you are growing");
-    return () => {
-      console.log("return function is called");
-    };
-  });
+
+  const firstNameHandler = (e) => {
+    if (e.key === "Enter") lastName.current.focus();
+  };
+  const lastNameHandler = (e) => {
+    if (e.key === "Enter") submit.current.focus();
+  };
+  const submitHandler = (e) => {
+    if (e.key === "Enter") alert("form submitted");
+  };
 
   return (
     <div className="App">
-      <h2>use effect</h2>
-      <h3>growth:{growth} </h3>
-      <button onClick={() => setGrowth(growth + 10)}>born and grow</button>
+      <input
+        ref={firstName}
+        onKeyDown={firstNameHandler}
+        placeholder="enter first name"
+      />
+      <input
+        ref={lastName}
+        onKeyDown={lastNameHandler}
+        placeholder="enter last name"
+      />
+      <input
+        ref={submit}
+        onKeyDown={submitHandler}
+        type="submit"
+        value="submit"
+      />
     </div>
   );
 }
 
-// class App extends React.Component {
-//   componentDidMount() {
-//     console.log("did mount called");
-//   }
-//   componentDidUpdate() {
-//     console.log("did update is called");
-//   }
-//   render() {
-//     return <button onClick={() => this.setState({ x: 1 })}>hello</button>;
-//   }
-// }
 export default App;
